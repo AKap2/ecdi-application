@@ -81,7 +81,7 @@
     if KK==2
         logis = @(x)2./(1+exp(-x));
         x0=zeros(n+6*(p-2),1); % Initialize with b=0.
-        options = optimoptions('fmincon','Display','iter','Algorithm','sqp', 'ConstraintTolerance', 10^(-6), 'StepTolerance', 10^(-25));
+        options = optimoptions('fmincon','Display','iter','Algorithm','sqp', 'ConstraintTolerance', 10^(-6), 'StepTolerance', 10^(-6));
         problem.options = options;
         problem.solver = 'fmincon';
             problem.objective= @(pol) sum((sum((reshape(w,n,p).*((0:k:1).*logis(pol(1:n))+(0:k:1).^2.*(ones(n,1)-logis(pol(1:n)))-P)))).^2)+ mu*sum(pol(n+1:n+6*(p-2)));
@@ -124,7 +124,7 @@
         t3c=@(a,b) -2*a^2-6*a*b-6*b^2+6;
         t3b=@(a,b)a*b+t3c(a,b)/2;
         p3=@(pol) (ones(n,1)-arrayfun(t3a,trB3(pol(1:n),pol(n+1:2*n)))-arrayfun(t3b,trA3(pol(1:n)),trB3(pol(1:n),pol(n+1:2*n)))).*(0:k:1).^3+arrayfun(t3b,trA3(pol(1:n)),trB3(pol(1:n),pol(n+1:2*n))).*(0:k:1).^2+arrayfun(t3a,trB3(pol(1:n),pol(n+1:2*n))).*(0:k:1);
-        options = optimoptions('fmincon','Display','iter','Algorithm','sqp', 'ConstraintTolerance', 10^(-6), 'StepTolerance', 10^(-20));
+        options = optimoptions('fmincon','Display','iter','Algorithm','sqp', 'ConstraintTolerance', 10^(-6), 'StepTolerance', 10^(-6));
         problem.options = options;
         problem.solver = 'fmincon';
         problem.objective= @(pol) sum(sum((reshape(w,n,p).*(p3(pol) -P))).^2)+ mu*sum(pol(2*n+1:2*n+6*(p-2)));
@@ -170,7 +170,7 @@
         options = optimoptions('fmincon','Display','iter','Algorithm','sqp', 'ConstraintTolerance', 10^(-6), 'StepTolerance', 10^(-6));
         problem.options = options;
         problem.solver = 'fmincon';
-        problem.objective= @(pol) sum(sum((reshape(w,n,p).*(p4(pol) -P))).^2)+ mu*sum(pol(3 *n+1:3*n+4*(p-2)));
+        problem.objective= @(pol) sum(sum((reshape(w,n,p).*(p4(pol) -P))).^2)+ mu*sum(pol(3 *n+1:3*n+6*(p-2)));
         problem.x0 = x0;
         problem.nonlcon = @(pol)teststat_k4_3d_transformed(X0_ord_rep ,X1_rep ,pol ,o ,u, p,test);
         [alpha,f,exitflag] = fmincon(problem);
