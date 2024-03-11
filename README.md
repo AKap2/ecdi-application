@@ -5,7 +5,7 @@
 
 ==================================================================
 
- ECDI is the empirical copula displacement interpolation. Based on two samples (with uniform margins) from the same environment with only one different external factor $t$ (scaled to [0,1]), additional samples from the same environment are generated with $t \in (0,1)$.
+ECDI is the empirical copula displacement interpolation. Based on two samples (with uniform margins) from the same environment with only one different external factor $t$ (scaled to [0,1]), additional samples from the same environment are generated with $t \in (0,1)$.
 
 Main functions are:    
 ECDI2dparametric - implemented for 2-dimensional copula samples from parametric copulas.     
@@ -32,3 +32,8 @@ teststat_k4(X0_ord,X1,pol,o ,u,p,test) - returns z=teststatistic of location pol
 teststat_k4_3d(X0_ord,X1,pol,o ,u,p,test) - returns z=teststatistic of location polynomial of degree 4 at locations 0:1/(p-1):1 and deviation from quantiles for 3d data     
 
 umarg(X0,k,u,o) - transforms the margins of X0 to be uniform in such a way, that the teststatistic of the margins is larger than u and smaller than o    
+
+
+===================================================================================================================================
+
+The file Results-Empirical-Copula-Displacement-Interpolation.pdf has additional results for the ECDI procedure applied to copula samples from parametric copulas and the weather application. 
