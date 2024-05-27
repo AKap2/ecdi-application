@@ -11,7 +11,9 @@ function T1=teststat(X2,n, test)
 switch test
     case 'T2'
         k=10; 
-        m=1/19.1852364964591; 
+        m1=[1/(n+1):1/(n+1):n/(n+1)];
+m=1/(k*log(sum(exp(k*m1)))+k*log(sum(exp(-k*m1))));
+%        m=1/19.1852364964591; % Erwarteter Korrekturfaktor unter der Annahme, dass die Ränder U(0,1)-sind, k=10
         approx_min=@(Data) -log(sum(exp(-Data)));
         approx_max=@(Data) log(sum(exp(Data)));
         T1=(( 1/k*(approx_max(k*X2)-approx_min(k*X2))*m   )^2  ) / ( sum((X2-0.5).^2) );
@@ -27,16 +29,29 @@ switch test
 
     case 'T5'
         k=1; 
-        m=1/13.8779456864436; 
-        approx_min=@(Data) -log(sum(exp(-Data)));
+                m1=[1/(n+1):1/(n+1):n/(n+1)];
+m=1/(k*log(sum(exp(k*m1)))+k*log(sum(exp(-k*m1))));
+approx_min=@(Data) -log(sum(exp(-Data)));
         approx_max=@(Data) log(sum(exp(Data)));
         T1=(( 1/k*(approx_max(k*X2)-approx_min(k*X2))*m   )^2  ) / ( (n-1)*var(X2)*(2-1/n*sum(((X2-mean(X2))./sqrt(var(X2))).^3))^2 );
 
 
+    case 'CS'%, k \in [0,700]
+        k=1; 
+                m1=[1/(n+1):1/(n+1):n/(n+1)];
+m=1/(k*log(sum(exp(k*m1)))+k*log(sum(exp(-k*m1))));
+approx_min=@(Data) -log(sum(exp(-Data)));
+        approx_max=@(Data) log(sum(exp(Data)));
+        T1=(( 1/k*(approx_max(k*X2)-approx_min(k*X2))*m   )^2  ) / ( (n-1)*var(X2) );
+
     case 'CS-A'
         k=1; 
-        m=1/13.8779456864436; 
-        approx_min=@(Data) -log(sum(exp(-Data)));
+        %m1=[1/(n+1):1/(n+1):n/(n+1)];
+                m1=[1/(n+1):1/(n+1):n/(n+1)];
+m=1/(k*log(sum(exp(k*m1)))+k*log(sum(exp(-k*m1))));
+approx_min=@(Data) -log(sum(exp(-Data)));
         approx_max=@(Data) log(sum(exp(Data)));
         T1=(( (approx_max(k*X2)-approx_min(k*X2))*m   )^2 ) / ( (n-1)*var(X2) );
+
+
 end
